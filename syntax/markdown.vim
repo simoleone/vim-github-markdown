@@ -2,7 +2,8 @@
 " Language:     Markdown
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:    *.markdown
-" Last Change:	2010 May 21
+" Last Change:	2013 September 22
+" By:           Stijn Wouters
 
 if exists("b:current_syntax")
   finish
@@ -36,6 +37,8 @@ syn region markdownH6 matchgroup=markdownHeadingDelimiter start="#######\@!" end
 
 syn match markdownBlockquote ">\s" contained nextgroup=@markdownBlock
 
+syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" keepend contains=markdownLineStart
+syn region markdownCodeBlock matchgroup=markdownCodeDelimiter start="```" end="```" contained
 syn region markdownCodeBlock start="    \|\t" end="$" contained
 
 " TODO: real nesting
@@ -65,8 +68,6 @@ syn region markdownBold start="\S\@<=\*\*\|\*\*\S\@=" end="\S\@<=\*\*\|\*\*\S\@=
 syn region markdownBold start="\S\@<=__\|__\S\@=" end="\S\@<=__\|__\S\@=" keepend contains=markdownLineStart
 syn region markdownBoldItalic start="\S\@<=\*\*\*\|\*\*\*\S\@=" end="\S\@<=\*\*\*\|\*\*\*\S\@=" keepend contains=markdownLineStart
 syn region markdownBoldItalic start="\S\@<=___\|___\S\@=" end="\S\@<=___\|___\S\@=" keepend contains=markdownLineStart
-syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" transparent keepend contains=markdownLineStart
-syn region markdownCode matchgroup=markdownCodeDelimiter start="`` \=" end=" \=``" keepend contains=markdownLineStart
 
 syn match markdownEscape "\\[][\\`*_{}()#+.!-]"
 
@@ -96,6 +97,8 @@ hi def link markdownUrlTitleDelimiter     Delimiter
 hi def link markdownItalic                htmlItalic
 hi def link markdownBold                  htmlBold
 hi def link markdownBoldItalic            htmlBoldItalic
+hi def link markdownCode                  String
+hi def link markdownCodeBlock             String
 hi def link markdownCodeDelimiter         Delimiter
 
 hi def link markdownEscape                Special
